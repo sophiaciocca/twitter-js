@@ -18,3 +18,5 @@ app.get('/', function(req, res, next){
 app.get('/news', function(req, res, next){
   res.send('This is the news page');
 });
+
+//hello this is sophia making a comment
