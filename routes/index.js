@@ -3,7 +3,9 @@ const router = express.Router();
 const tweetBank = require('../tweetBank');
 var bodyParser = require('body-parser');
 
-router.use(bodyParser.urlencoded({ extend: false}));
+module.exports = function(io){
+
+  router.use(bodyParser.urlencoded({ extend: false}));
 router.use(bodyParser.json());
 
 router.get('/', function(req, res) {
@@ -16,6 +18,7 @@ router.post('/tweets', function(req, res){
   var name = req.body.name;
   var text = req.body.text;
   tweetBank.add(name, text);
+  io.sockets.emit('newTweet', {text});
   res.redirect('/');
 });
 
@@ -27,8 +30,5 @@ router.get('/users/:name', function(req, res, next) {
     console.log(tweets);
 });
 
-// router.get('/stylesheets/style.css', function(req, res, next) {
-//     res.sendFile('/public/stylesheets/style.css');
-// })
-
-module.exports = router;
+  return router;
+};

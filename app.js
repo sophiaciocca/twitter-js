@@ -1,21 +1,24 @@
 //load in express
 const express = require('express');
 const app = express();
+var socketio = require('socket.io');
 
 //load in nunjucks
 const nunjucks = require('nunjucks');
 
 //load in routes
 const routes = require('./routes');
-app.use('/', routes);
 
 // nunjucks.render('index.html', locals, function(err, output) {
 //   console.log(output, "this is output");
 // });
 
-app.listen(3000, () => {
+var server = app.listen(3000, () => {
   console.log('Server listening!');
 });
+
+var io = socketio.listen(server);
+app.use('/', routes(io));
 
 app.set('view engine', 'html');
 app.engine('html', nunjucks.render);
@@ -28,28 +31,3 @@ app.use('*', function(req, res, next){
 
 //serving up static files
 app.use(express.static('public'));
-
-// app.get('/nunjucks', function(req, res, next){
-//   res.render('index.html', {
-//   title: 'Our Awesome Title',
-//   people: [
-//     {name: 'Gandalf'},
-//     {name: 'Frodo'},
-//     {name: 'Betty'}
-//   ],
-//   activities: [
-//     'biking',
-//     'coding',
-//     'sleeping'
-//   ]
-// });
-// });
-
-// app.get('/', function(req, res, next){
-//   res.send('<h1>HELLO THERE</h1>');
-// });
-
-// app.get('/news', function(req, res, next){
-//   res.send('This is the news page');
-// });
-
