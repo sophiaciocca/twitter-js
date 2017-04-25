@@ -17,7 +17,7 @@
       {% for tweet in tweets %}
         <li>
             <div class ="tweetbox">
-                <img><strong>{{tweet.name}}</strong><br>
+                <img><strong><a href = "/users/{{tweet.name}}">{{tweet.name}}</a></strong><br>
             {{tweet.content}}
             </div>
         </li>
