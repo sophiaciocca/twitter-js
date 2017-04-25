@@ -24,6 +24,7 @@ app.set('view engine', 'html');
 app.engine('html', nunjucks.render);
 nunjucks.configure('views', {autoescape: true, express: app, noCache: true});
 
+//
 app.use('*', function(req, res, next){
   console.log(req.method + ' ' + req.baseUrl);
   next();
