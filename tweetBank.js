@@ -1,25 +1,32 @@
+//load in lodash
 const _ = require('lodash');
 
+//this array will hold ALL of the data
 var data = [];
 
+//'add': to add to the data, it will push to the data array
 function add(name, content, id){
   data.push({name: name, content: content, id: id});
 }
 
+//'list' returns a clone of the data
 function list(){
   return _.cloneDeep(data);
 }
 
+//'find' searches the data with specific properties
 function find(properties){
   return _.cloneDeep(_.filter(data, properties));
 }
 
+//exporting our add/list/find functions so that our routes/index.js can use them
 module.exports = {
   add: add,
   list: list,
   find: find
 };
 
+//all of these just generate the fake twitter users
 const randArrayEl = function(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 };
