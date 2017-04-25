@@ -14,14 +14,16 @@
     <div class="col-md-9">
       <!-- post tweet form! -->
       {% if showForm %}
-        <form action="/tweets" method="POST">
+        <form class = "input-group" action="/tweets" method="POST">
+        <div class = "col-md-3">
           <label for="name_field">Name:</label>
-          <input name="name" type="text" id="name_field" value={{name}} />
-
+          <input name="name" type="text" id="name_field" class = "form-control" value={{name}} />
+        </div>
+        <div class = "col-md-9">
           <label for="text_field">Text:</label>
-          <input name="text" type="text" id="text_field" style="width: 350px;" />
-
-          <input type="submit" value="Submit" />
+          <input name="text" type="text" id="text_field" class = "form-control" />
+            <input class = "btn btn-success" type="submit" value="Submit" />
+          </div>
         </form>
       {% endif %}
 
