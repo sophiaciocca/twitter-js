@@ -5,30 +5,37 @@ const app = express();
 //load in nunjucks
 const nunjucks = require('nunjucks');
 
-var locals = {
-  title: 'Our Awesome Title',
-  people: [
-    {name: 'Gandalf'},
-    {name: 'Frodo'},
-    {name: 'Betty'}
-  ]
-};
+// nunjucks.render('index.html', locals, function(err, output) {
+//   console.log(output, "this is output");
+// });
 
-nunjucks.render('index.html', locals, function(err, output) {
-  console.log(output, "this is output");
+app.listen(3000, () => {
+  console.log('Server listening!');
 });
 
 app.set('view engine', 'html');
 app.engine('html', nunjucks.render);
-nunjuck.configure('views');
+nunjucks.configure('views', {autoescape: true, express: app, noCache: true});
 
 app.use('*', function(req, res, next){
   console.log(req.method + ' ' + req.baseUrl);
   next();
 });
 
-app.listen(3000, () => {
-  console.log('Server listening!');
+app.get('/nunjucks', function(req, res, next){
+  res.render('index.html', {
+  title: 'Our Awesome Title',
+  people: [
+    {name: 'Gandalf'},
+    {name: 'Frodo'},
+    {name: 'Betty'}
+  ],
+  activities: [
+    'biking',
+    'coding',
+    'sleeping'
+  ]
+});
 });
 
 app.get('/', function(req, res, next){
