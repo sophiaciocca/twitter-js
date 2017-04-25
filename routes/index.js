@@ -30,5 +30,13 @@ router.get('/users/:name', function(req, res, next) {
     console.log(tweets);
 });
 
+//route to single tweet page
+router.get('/tweets/:id', function(req, res, next) {
+    var id = Number(req.params.id);
+    /*var tweet = tweetBank.find({id: id});*/
+    var tweets = tweetBank.find({id: id});
+    res.render('index', {id: id, tweets: tweets});
+});
+
   return router;
 };
