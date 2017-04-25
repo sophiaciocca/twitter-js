@@ -4,12 +4,13 @@ const _ = require('lodash');
 //this array will hold ALL of the data
 var data = [];
 
-//'add': to add to the data, it will push to the data array
+//'add': to add to the data, it will push a new tweet object to the data array
 function add(name, content, id){
-  data.push({name: name, content: content, id: id});
+  data.push({name: name, content: content, id: data.length});
 }
 
 //'list' returns a clone of the data
+//(we're cloning b/c we don't want a user to manipulate the original array)
 function list(){
   return _.cloneDeep(data);
 }
@@ -26,7 +27,7 @@ module.exports = {
   find: find
 };
 
-//all of these just generate the fake twitter users
+//all of these just generate the fake twitter users ("seeding the database")
 const randArrayEl = function(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 };
@@ -43,5 +44,5 @@ const getFakeTweet = function() {
 };
 
 for (let i = 0; i < 10; i++) {
-  module.exports.add( getFakeName(), getFakeTweet(), i);
+  module.exports.add( getFakeName(), getFakeTweet(), id);
 }
