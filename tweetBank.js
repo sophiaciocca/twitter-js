@@ -5,7 +5,7 @@ const _ = require('lodash');
 var data = [];
 
 //'add': to add to the data, it will push a new tweet object to the data array
-function add(name, content, id){
+function add(name, content){
   data.push({name: name, content: content, id: data.length});
 }
 

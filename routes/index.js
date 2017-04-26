@@ -5,15 +5,15 @@ const router = express.Router(); //creating a standalone router
 //loading in our tweetBank page
 const tweetBank = require('../tweetBank');
 
-//loading in bodyParser
+//loading in bodyParser (will be used for POSTing tweets, to get the actual post from it)
 var bodyParser = require('body-parser');
 
 //exporting all the routes
 module.exports = function (io) {
 
     //enabling bodyParser within router
-    router.use(bodyParser.urlencoded({ extend: false }));
-    router.use(bodyParser.json());
+    router.use(bodyParser.urlencoded({ extend: false })); //for HTML form submits
+    router.use(bodyParser.json()); //for AJAX (jSON) requests - just have it in here just in case form ever got something encoded that way
 
     //route to get root (homepage)
     router.get('/', function (req, res, next) {

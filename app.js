@@ -27,10 +27,10 @@ var io = socketio.listen(server);
 app.use('/', routes(io));
 
 //setting up express to use nunjucks
+app.engine('html', nunjucks.render); //"we'll be using nunjucks to render html"
 app.set('view engine', 'html'); //what file extension do our templates have?
-app.engine('html', nunjucks.render); //how to render html templates?
 nunjucks.configure('views', {autoescape: true, express: app, noCache: true}); //where to find the views, caching off
-
+//^^views is just name of folder
 
 //console.logging requests to the server. here: just c-logging 'GET /url'
 //(this is a piece of "middleware", made just so we can just see what's going on.)
